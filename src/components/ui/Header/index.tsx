@@ -19,7 +19,7 @@ export function Header(){
 
                 <nav className={styles.menuNav}>
 
-                    <Link href='/categorias'>
+                    <Link href='/category'>
                     <span>Categorias</span>                    
                     </Link>
                     

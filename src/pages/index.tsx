@@ -5,7 +5,6 @@ import {Input} from "../components/ui/Input"
 import { FormEvent, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '@/contexts/AuthContext';
 import { toast } from 'react-toastify';
-import { GetServerSideProps } from 'next';
 
 
 export default function Home() {

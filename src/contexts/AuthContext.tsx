@@ -57,16 +57,11 @@ export function AuthProvider({children}: AuthProviderProps){
                     email
                 })
 
-                console.log(response.data)
-                console.log(user)
             })
             .catch(() =>{
                 signOut();
             })
         }
-
-        // console.log(isAuthenticated)
-        // console.log(user)
 
     }, [])
 
@@ -94,7 +89,7 @@ export function AuthProvider({children}: AuthProviderProps){
             //passar o token para todas as proximas requisicoes
             api.defaults.headers['Authorization'] = `Bearer ${token}`
 
-            toast.success("Logado com sucesso")
+            toast.success(`Bem-vindo de volta, ${name}`)
 
             Router.push('/dashboard')
              

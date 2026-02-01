@@ -1,9 +1,8 @@
 import { AuthProvider } from "@/contexts/AuthContext";
 import "../styles/globals.scss";
 import type { AppProps } from "next/app";
-import "react-toastify/dist/ReactToastify.css";
 
-import "react-toastify/dist/ReactToastify.css";
+
 import dynamic from "next/dist/shared/lib/dynamic";
 
 const ToastContainer = dynamic(

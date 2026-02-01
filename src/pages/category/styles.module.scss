@@ -37,9 +37,30 @@
     border-radius: 0.3rem;
     color: var(--dark-700);
     transition: background-color 0.7s;
-
-
-        &:hover{
-            background-color: var(--red-900);
+    
+    &:hover{
+        background-color: var(--red-900);
+    }
+    
+    &[disabled]{
+        cursor: not-allowed;
+        svg{
+            animation: animate 2s infinite;
         }
     }
+    
+    &:hover{
+        filter: brightness(1.08);
+    }
+}
+
+@keyframes animate {
+    from{
+        transform: rotate(0deg);
+    }
+
+    to{
+        transform: rotate(360deg);
+    }
+}
+
