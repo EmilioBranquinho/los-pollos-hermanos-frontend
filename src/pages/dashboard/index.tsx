@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Modal from 'react-modal'
 import { api } from '@/services/apiClient'
 import { ModalOrder } from '../../components/ui/ModalOrder'
+import { toast } from 'react-toastify'
 
 interface Order {
     id: string;
@@ -74,6 +75,33 @@ export default function Dashboard({ orders }: OrderProps){
         setModalVisible(true)
     }
 
+
+    async function handleFinishOrder(id: string){
+
+        try{
+            const FinishResponse = await api.put("/order/finish", {
+                order_id: id
+            })
+
+            const response = await api.get("/orders");
+
+            setOrdersList(response.data)
+            toast.success("Pedido finalizado com sucesso!")
+            setModalVisible(false)
+
+        } catch (error) {
+            toast.error("Erro ao finalizar o pedido")
+            console.log(error)
+        }
+    }
+
+    async function handleRefreshOrders(){
+
+        const response = await api.get("/orders");
+
+        setOrdersList(response.data)
+    }
+
     Modal.setAppElement('#__next')
 
     return(
@@ -83,7 +111,7 @@ export default function Dashboard({ orders }: OrderProps){
             <main className={styles.container}>
                 <div className={styles.containerHeader}>
                     <h1>Dashboard</h1>
-                    <button>
+                    <button onClick={handleRefreshOrders}>
                         <FiRefreshCcw size={25} color="#FFF"/>
                     </button>
                 </div>
@@ -100,7 +128,12 @@ export default function Dashboard({ orders }: OrderProps){
                 </article>
             </main>
             {modalVisible &&(
-                <ModalOrder isOpen={modalVisible} onRequestClose={handleCloseModal} order={modalItem}/>
+                <ModalOrder 
+                isOpen={modalVisible} 
+                onRequestClose={handleCloseModal} 
+                order={modalItem}
+                handleFinishOrder={handleFinishOrder}
+                />
             )}
             
         </div>

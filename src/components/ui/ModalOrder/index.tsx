@@ -3,14 +3,17 @@ import Modal from 'react-modal'
 
 import { FiX } from 'react-icons/fi'
 import { OrderItemProps } from '@/pages/dashboard';
+import { api } from '@/services/apiClient';
+import { toast } from 'react-toastify';
 
 interface ModalOrderProps {
     isOpen: boolean;
     onRequestClose: () => void;
+    handleFinishOrder: (id: string)=> void;
     order: OrderItemProps[]
 }
 
-export function ModalOrder({isOpen, onRequestClose, order}: ModalOrderProps){
+export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder}: ModalOrderProps){
 
     const customStyles = {
         content: {
@@ -23,6 +26,7 @@ export function ModalOrder({isOpen, onRequestClose, order}: ModalOrderProps){
             backgroundColor: '#1d1d2e'
         }
     }
+
 
     return(
         <Modal
@@ -56,7 +60,7 @@ export function ModalOrder({isOpen, onRequestClose, order}: ModalOrderProps){
                     </section> 
                 )))}
 
-                <button className={styles.buttonOrder} onClick={() =>{}}>
+                <button className={styles.buttonOrder} onClick={() =>{handleFinishOrder(order[0].order.id)}}>
                     Concluir pedido
                 </button>
 
