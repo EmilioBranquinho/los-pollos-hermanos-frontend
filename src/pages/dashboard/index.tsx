@@ -1,3 +1,5 @@
+'use client';
+
 import { canSSRAuth } from '@/utils/canSSRAuth'
 import styles from './styles.module.scss'
 import { Header } from '@/components/ui/Header'
@@ -49,35 +51,36 @@ export interface OrderItemProps {
     updatedAt: string
 }
 
-
-
 export default function Dashboard({ orders }: OrderProps){  
 
     const[ordersList, setOrdersList] = useState(orders || []);
     const[modalItem, setModalItem] = useState<OrderItemProps[]>([]);
     const[modalVisible, setModalVisible] = useState(false);
+    const[isLoading, setIsLoading] = useState(false);
 
     function handleCloseModal(){
         setModalVisible(false)
     }
     
     async function handleOpenModalView(id: string){
+        try {
+            const response = await api.get("/order/detail", {
+                params: {
+                    order_id: id
+                }
+            })
 
-        const response = await api.get("/order/detail", {
-            params: {
-                order_id: id
-            }
-        })
+            console.log(response.data)
 
-        console.log(response.data)
-
-        setModalItem(response.data)
-        setModalVisible(true)
+            setModalItem(response.data)
+            setModalVisible(true)
+        } catch (error) {
+            toast.error("Erro ao carregar detalhes do pedido")
+            console.log(error)
+        }
     }
 
-
     async function handleFinishOrder(id: string){
-
         try{
             const FinishResponse = await api.put("/order/finish", {
                 order_id: id
@@ -96,10 +99,17 @@ export default function Dashboard({ orders }: OrderProps){
     }
 
     async function handleRefreshOrders(){
-
-        const response = await api.get("/orders");
-
-        setOrdersList(response.data)
+        setIsLoading(true)
+        try {
+            const response = await api.get("/orders");
+            setOrdersList(response.data)
+            toast.success("Pedidos atualizados!")
+        } catch (error) {
+            toast.error("Erro ao atualizar pedidos")
+            console.log(error)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     Modal.setAppElement('#__next')
@@ -110,21 +120,36 @@ export default function Dashboard({ orders }: OrderProps){
             <Header/>
             <main className={styles.container}>
                 <div className={styles.containerHeader}>
-                    <h1>Dashboard</h1>
-                    <button onClick={handleRefreshOrders}>
-                        <FiRefreshCcw size={25} color="#FFF"/>
+                    <h1>Últimos pedidos</h1>
+                    <button onClick={handleRefreshOrders} disabled={isLoading} title="Atualizar pedidos">
+                        <FiRefreshCcw size={25} color="#00d9ff" style={{
+                            animation: isLoading ? 'spin 1s linear infinite' : 'none'
+                        }}/>
                     </button>
                 </div>
-                <article className={styles.listOrders}
-                >
-                {orders.map((order) =>(
-                    <section key={order.id} className={styles.orderItem}>
-                        <button onClick={()=>{handleOpenModalView(order.id)}}>
-                            <div className={styles.tag}></div>
-                            <span>Mesa {order.table}</span>
-                        </button>
-                    </section>
-                ))}
+                <article className={styles.listOrders}>
+                {ordersList && ordersList.length > 0 ? (
+                    ordersList.map((order) =>(
+                        <section key={order.id} className={styles.orderItem}>
+                            <button 
+                                onClick={()=>{handleOpenModalView(order.id)}}
+                                title={`Abrir pedido mesa ${order.table}`}
+                            >
+                                <div className={styles.tag}>🍽️</div>
+                                <span>Mesa {order.table}</span>
+                            </button>
+                        </section>
+                    ))
+                ) : (
+                    <div style={{ 
+                        gridColumn: '1 / -1', 
+                        textAlign: 'center', 
+                        padding: '60px 20px',
+                        color: '#a0aec0'
+                    }}>
+                        <p style={{ fontSize: '1.1rem' }}>Nenhum pedido no momento</p>
+                    </div>
+                )}
                 </article>
             </main>
             {modalVisible &&(

@@ -1,3 +1,5 @@
+$bg-primary: #0f1219;
+$bg-secondary: #1a1f2e;
 
 *{
   margin: 0;
@@ -30,7 +32,7 @@ a{
 }
 
 body{
-  background: var(--dark-700);
+  background: linear-gradient(135deg, $bg-primary 0%, $bg-secondary 100%);
 }
 
 body, input, button, textarea, select{

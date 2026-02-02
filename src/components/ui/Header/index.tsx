@@ -14,7 +14,7 @@ export function Header(){
             <div className={styles.headerContent}>
                 <Link
                 href='/dashboard'>
-                <img src="/logo.png" alt="Los Pollos Hermanos" width={100} height={100} />
+                {/* <img src="/logo.png" alt="Los Pollos Hermanos" width={100} height={100} /> */}
                 </Link>
 
                 <nav className={styles.menuNav}>

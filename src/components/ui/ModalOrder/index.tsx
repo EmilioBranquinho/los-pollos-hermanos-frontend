@@ -1,10 +1,9 @@
+'use client'
+
 import styles from './styles.module.scss'
 import Modal from 'react-modal'
-
 import { FiX } from 'react-icons/fi'
-import { OrderItemProps } from '@/pages/dashboard';
-import { api } from '@/services/apiClient';
-import { toast } from 'react-toastify';
+import { OrderItemProps } from '@/pages/dashboard'
 
 interface ModalOrderProps {
     isOpen: boolean;
@@ -21,12 +20,23 @@ export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder}: M
             left: '50%',
             right: 'auto',
             bottom: 'auto',
-            padding: '30px',
+            maxWidth: '500px',
+            width: '90%',
+            maxHeight: '80vh',
+            padding: '32px',
             transform: 'translate(-50%, -50%)',
-            backgroundColor: '#1d1d2e'
+            backgroundColor: '#1a1f2e',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            borderRadius: '16px',
+            overflowY: 'auto' as const,
+            boxShadow: '0 25px 50px rgba(0, 217, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+        },
+        overlay: {
+            backgroundColor: 'rgba(15, 18, 25, 0.7)',
+            backdropFilter: 'blur(8px)',
         }
-    }
-
+    } as const
 
     return(
         <Modal
@@ -39,29 +49,58 @@ export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder}: M
             type='button'
             onClick={onRequestClose}
             className='react-modal-close'
-            style={{ background: "transparent", border: 0 }}
+            style={{ 
+                background: "transparent", 
+                border: 0,
+                cursor: 'pointer',
+                padding: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#00d9ff',
+                transition: 'all 0.3s ease',
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+            }}
+            title="Fechar"
             >
-                <FiX size={45} color="#f34748"/>
+                <FiX size={28} />
             </button>
 
             <div className={styles.container}>
 
-                <h2>Detalhes do pedido</h2>
+                <h2>Detalhes do Pedido</h2>
                 <span className={styles.table}>
-                    Mesa: {order[0].order.table}
+                    🍽️ Mesa {order[0]?.order?.table || 'N/A'}
                 </span>
 
-                {order.map((item =>(
-                    <section key={item.id} className={styles.containerItem}>
-                        <span>{item.amount} - <strong>{item.product.name}</strong></span>
-                        <span className={styles.description} >
-                            {item.product.description}
-                        </span>
-                    </section> 
-                )))}
+                {order && order.length > 0 ? (
+                    order.map((item) =>(
+                        <section key={item.id} className={styles.containerItem}>
+                            <span>
+                                <strong>{item.amount}x</strong> {item.product.name}
+                            </span>
+                            <span className={styles.description} >
+                                {item.product.description}
+                            </span>
+                        </section> 
+                    ))
+                ) : (
+                    <div style={{ color: '#a0aec0', textAlign: 'center', padding: '20px' }}>
+                        Nenhum item neste pedido
+                    </div>
+                )}
 
-                <button className={styles.buttonOrder} onClick={() =>{handleFinishOrder(order[0].order.id)}}>
-                    Concluir pedido
+                <button 
+                    className={styles.buttonOrder} 
+                    onClick={() =>{handleFinishOrder(order[0]?.order?.id)}}
+                    style={{
+                        fontWeight: 600,
+                        letterSpacing: '0.5px',
+                    }}
+                >
+                    ✓ Concluir Pedido
                 </button>
 
             </div>

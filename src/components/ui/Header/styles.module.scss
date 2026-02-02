@@ -1,5 +1,9 @@
+$bg-primary: #0f1219;
+$bg-secondary: #1a1f2e;
+
 .headerContainer{
     height: 5rem;
+    background-color: linear-gradient(135deg, $bg-primary 0%, $bg-secondary 100%);
 }
 
 .headerContent{
