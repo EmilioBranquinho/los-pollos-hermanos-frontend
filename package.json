@@ -15,6 +15,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.5.0",
+    "react-modal": "^3.16.3",
     "react-toastify": "^11.0.5",
     "sass": "^1.97.3"
   },
@@ -22,6 +23,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-modal": "^3.16.3",
     "eslint": "^9",
     "eslint-config-next": "16.1.5",
     "typescript": "^5"
