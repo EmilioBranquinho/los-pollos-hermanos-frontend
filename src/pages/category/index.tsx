@@ -7,6 +7,7 @@ import { Button } from '../../components/ui/Button'
 import { canSSRAuth } from "@/utils/canSSRAuth";
 import { setupAPIClient } from "@/services/api";
 import { api } from "@/services/apiClient"
+import { FiPlus, FiTrash2 } from "react-icons/fi"
 
 interface Category {
     id: string;
@@ -58,6 +59,21 @@ export default function Category({ categories }: CategoryProps){
 
     }
 
+    async function handleDeleteCategory(category_id: string){
+
+        try{
+            const response = await api.delete(`/category/remove?categoryId=${category_id}`)
+
+            setCategoriesList(
+                categoriesList.filter((category) => category.id !== response.data.id)
+            )
+            toast.success("Categoria deletada com sucesso!")
+            console.log(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return(
         <>
         <Head>
@@ -66,29 +82,68 @@ export default function Category({ categories }: CategoryProps){
         <div>
             <Header/>
             <main className={styles.container}>
-                <h1>Categorias</h1>
-                <form onSubmit={(e)=>{handleRegisterCategory(e)}} 
-                className={styles.form}
-                >
-                    <input 
-                    type="text"
-                    placeholder="Digite o nome da categoria:"
-                    className={styles.input}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                     />
+                <div className={styles.containerHeader}>
+                    <div>
+                        <h1>Categorias</h1>
+                        <p className={styles.subtitle}>Gerencie as categorias do seu menu</p>
+                    </div>
+                </div>
 
-                    <Button
-                    className={styles.buttonAdd}
-                    type="submit"
-                    loading={loading}
-                    >Adicionar Categoria
-                    </Button>
+                <form onSubmit={handleRegisterCategory} className={styles.form}>
+                    <div className={styles.formSection}>
+                        <label htmlFor="category-name" className={styles.label}>Nome da Categoria</label>
+                        <div className={styles.inputGroup}>
+                            <input 
+                                id="category-name"
+                                type="text"
+                                placeholder="Ex: Bebidas, Sobremesas, Pratos Principais..."
+                                className={styles.input}
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                            <Button
+                                type="submit"
+                                disabled={loading}
+                                className={styles.buttonAdd}
+                            >
+                                <FiPlus size={20} />
+                                {loading ? "Adicionando..." : "Adicionar"}
+                            </Button>
+                        </div>
+                    </div>
                 </form>
 
-                {categoriesList.map((category)=>(
-                    <span key={category.id}>{category.name}</span>
-                ))}
+                <div className={styles.categoriesSection}>
+                    <h2 className={styles.sectionTitle}>
+                        {categoriesList.length > 0 ? `${categoriesList.length} Categoria${categoriesList.length !== 1 ? 's' : ''}` : 'Nenhuma categoria'}
+                    </h2>
+                    
+                    {categoriesList.length > 0 ? (
+                        <div className={styles.categoriesList}>
+                            {categoriesList.map((category) => (
+                                <div key={category.id} className={styles.categoryCard}>
+                                    <div className={styles.categoryContent}>
+                                        <span className={styles.categoryName}>{category.name}</span>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={() => handleDeleteCategory(category.id)}
+                                        // disabled={deletingId === category.id}
+                                        className={styles.deleteButton}
+                                        title="Remover categoria"
+                                    >
+                                        <FiTrash2 size={18} />
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className={styles.emptyState}>
+                            <p>Nenhuma categoria cadastrada ainda</p>
+                            <span>Crie a primeira categoria para começar</span>
+                        </div>
+                    )}
+                </div>
             </main>
         </div>
         </>

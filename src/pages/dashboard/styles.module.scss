@@ -103,10 +103,6 @@ $border-color: rgba(255, 255, 255, 0.08);
       background: linear-gradient(135deg, rgba($accent-primary, 0.2), rgba($accent-secondary, 0.15));
       animation: glow 2s ease-in-out;
       transform: translateY(-2px);
-
-      // svg {
-      //   animation: spin 1s linear infinite;
-      // }
     }
 
     svg {

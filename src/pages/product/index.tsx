@@ -91,6 +91,12 @@ export default function Product({ categories }: CategoryProps){
     return(
         <>
         <Header/>
+            <div className={styles.containerHeader}>
+                <div>
+                    <h1>Novo Produto</h1>
+                    <p className={styles.subtitle}>Adicione um novo produto ao cardápio</p>
+                </div>
+            </div>
         <main className={styles.container}>
             
             <form onSubmit={(e)=>{handleRegisterProduct(e)}} className={styles.form}>
@@ -119,7 +125,9 @@ export default function Product({ categories }: CategoryProps){
 
                 </label>
 
-                <select value={selectedCategory} onChange={(e)=>{handleChangeCategory(e)}}>
+                <select
+                className={styles.select}
+                value={selectedCategory} onChange={(e)=>{handleChangeCategory(e)}}>
                     {categoriesList.map((category) =>(
                         <option key={category.id} value={category.id}>
                             {category.name}
@@ -168,11 +176,10 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
         const response = await api.get("/category")
     
         const categories = response.data;
-
-    
+ 
         return {
             props:{
                 categories: categories
             }
-         }
+        }
 })

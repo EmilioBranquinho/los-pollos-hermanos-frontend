@@ -60,6 +60,7 @@ export default function Dashboard({ orders }: OrderProps){
     const[modalVisible, setModalVisible] = useState(false);
     const[isLoading, setIsLoading] = useState(false);
     const[loadingModal, setLoadingModal] = useState(false);
+    const[loadingFinish, setLoadingFinish] = useState(false);
     
     const { user } = useContext(AuthContext)
 
@@ -94,6 +95,8 @@ export default function Dashboard({ orders }: OrderProps){
     }
 
     async function handleFinishOrder(id: string){
+
+        setLoadingFinish(true)
         try{
             const FinishResponse = await api.put("/order/finish", {
                 order_id: id
@@ -103,11 +106,14 @@ export default function Dashboard({ orders }: OrderProps){
 
             setOrdersList(response.data)
             toast.success("Pedido finalizado com sucesso!")
+            setLoadingFinish(false)
             setModalVisible(false)
 
         } catch (error) {
             toast.error("Erro ao finalizar o pedido")
             console.log(error)
+        } finally {
+            setLoadingFinish(false)
         }
     }
 
@@ -165,6 +171,7 @@ export default function Dashboard({ orders }: OrderProps){
             </main>
             {modalVisible &&(
                 <ModalOrder 
+                loadingFinish={loadingFinish}
                 isOpen={modalVisible} 
                 onRequestClose={handleCloseModal} 
                 order={modalItem}

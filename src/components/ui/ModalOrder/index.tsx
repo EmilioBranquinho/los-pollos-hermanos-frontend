@@ -4,15 +4,17 @@ import styles from './styles.module.scss'
 import Modal from 'react-modal'
 import { FiX } from 'react-icons/fi'
 import { OrderItemProps } from '@/pages/dashboard'
+import { ButtonFinishOrder } from '../ButtonFinishOrder'
 
 interface ModalOrderProps {
     isOpen: boolean;
     onRequestClose: () => void;
     handleFinishOrder: (id: string)=> void;
-    order: OrderItemProps[]
+    order: OrderItemProps[];
+    loadingFinish: boolean
 }
 
-export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder}: ModalOrderProps){
+export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder, loadingFinish}: ModalOrderProps){
 
     const customStyles = {
         content: {
@@ -92,16 +94,17 @@ export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder}: M
                     </div>
                 )}
 
-                <button 
+                <ButtonFinishOrder
                     className={styles.buttonOrder} 
                     onClick={() =>{handleFinishOrder(order[0]?.order?.id)}}
+                    loading={loadingFinish}
                     style={{
                         fontWeight: 600,
                         letterSpacing: '0.5px',
                     }}
                 >
                     ✓ Concluir Pedido
-                </button>
+                </ButtonFinishOrder>
 
             </div>
 
