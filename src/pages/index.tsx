@@ -5,6 +5,7 @@ import {Input} from "../components/ui/Input"
 import { FormEvent, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '@/contexts/AuthContext';
 import { toast } from 'react-toastify';
+import { FiArrowRight, FiLock, FiMail } from 'react-icons/fi';
 
 
 export default function Home() {
@@ -41,32 +42,56 @@ export default function Home() {
 
   return (
     <>
-    <div className={styles.containerCenter}>
-      <div className={styles.login}>
-        <form onSubmit={(e)=>{onSubmit(e)}}>
-          <Input
-          placeholder='Digite o seu email:'
-          type='text'
-          value={email}
-          onChange={(e)=>{setEmail(e.target.value)}}
-          />
+       <div className={styles.containerCenter}>
+      <div className={styles.loginCard}>
+        <div className={styles.loginHeader}>
+          <h1>Bem-vindo</h1>
+          <p>Acesse sua conta para continuar</p>
+        </div>
 
-          <Input
-          placeholder='Digite a sua senha:'
-          type='text'
-          value={password}
-          onChange={(e)=>{setPassword(e.target.value)}}
-          />
+        <form onSubmit={(e)=>{onSubmit(e)}} className={styles.form}>
+          <div className={styles.inputWrapper}>
+            <FiMail className={styles.inputIcon} size={20} />
+            <Input
+              placeholder='seu@email.com'
+              type='email'
+              value={email}
+              onChange={(e)=>{setEmail(e.target.value)}}
+              className={styles.input}
+            />
+          </div>
+
+          <div className={styles.inputWrapper}>
+            <FiLock className={styles.inputIcon} size={20} />
+            <Input
+              placeholder='Sua senha'
+              type='password'
+              value={password}
+              onChange={(e)=>{setPassword(e.target.value)}}
+              className={styles.input}
+            />
+          </div>
 
           <Button
-          type='submit'
-          loading={loading}
+            type='submit'
+            loading={loading}
+            className={styles.submitButton}
           >
-            Login
+            Entrar
           </Button>
         </form>
-        <a href='/signup' className={styles.text}>Nao tem conta? cadastre-se</a>
+
+        <div className={styles.divider}></div>
+
+        <p className={styles.signupPrompt}>
+          Não tem conta?{' '}
+          <a href='/signup' className={styles.signupLink}>
+            Cadastre-se aqui
+          </a>
+        </p>
       </div>
+
+      <div className={styles.backgroundDecor}></div>
     </div>
     </>
   );

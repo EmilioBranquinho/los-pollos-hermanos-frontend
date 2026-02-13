@@ -8,6 +8,7 @@ import { canSSRAuth } from "@/utils/canSSRAuth";
 import { setupAPIClient } from "@/services/api";
 import { api } from "@/services/apiClient"
 import { FiPlus, FiTrash2 } from "react-icons/fi"
+import { ClipLoader } from "react-spinners"
 
 interface Category {
     id: string;
@@ -106,8 +107,7 @@ export default function Category({ categories }: CategoryProps){
                                 disabled={loading}
                                 className={styles.buttonAdd}
                             >
-                                <FiPlus size={20} />
-                                {loading ? "Adicionando..." : "Adicionar"}
+                                {loading ? <ClipLoader/> : "Adicionar"}
                             </Button>
                         </div>
                     </div>

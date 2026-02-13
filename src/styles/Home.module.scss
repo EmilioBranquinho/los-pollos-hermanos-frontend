@@ -1,47 +1,346 @@
-.containerCenter{
+// Design System
+$bg-primary: #0f1219;
+$bg-secondary: #1a1f2e;
+$bg-tertiary: #252d3d;
+$accent-primary: #00d9ff;
+$accent-secondary: #7c3aed;
+$text-primary: #ffffff;
+$text-secondary: #a0aec0;
+$border-color: rgba(255, 255, 255, 0.08);
+$border-color-hover: rgba(0, 217, 255, 0.2);
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 217, 255, 0.2);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.containerCenter {
   min-height: 100vh;
+  background: linear-gradient(135deg, $bg-primary 0%, $bg-secondary 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  background-color: var(--gray-900);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba($accent-primary, 0.05) 0%, transparent 70%);
+    animation: float 6s ease-in-out infinite;
+    z-index: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -30%;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba($accent-secondary, 0.03) 0%, transparent 70%);
+    animation: float 8s ease-in-out infinite reverse;
+    z-index: 0;
+  }
 }
 
-.login{
-  margin-top: 2rem;
-  width: 600px;
+.loginCard {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  background: rgba($bg-secondary, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid $border-color;
+  border-radius: 20px;
+  padding: 48px 32px;
+  animation: fadeInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 480px) {
+    padding: 32px 24px;
+    border-radius: 16px;
+  }
+
+  &:hover {
+    border-color: rgba($accent-primary, 0.2);
+  }
+}
+
+.loginHeader {
+  margin-bottom: 40px;
+  text-align: center;
+  animation: fadeInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s backwards;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, $accent-primary, $accent-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    @media (max-width: 480px) {
+      font-size: 1.75rem;
+    }
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: 0.95rem;
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+  animation: fadeInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+}
+
+.inputWrapper {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 2rem 1.5rem;
+}
 
-  form{
-    width: 90%;
-    display: flex;
-    flex-direction: column;
+.inputIcon {
+  position: absolute;
+  left: 16px;
+  color: $accent-primary;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.input {
+  padding-left: 48px !important;
+  padding-right: 16px !important;
+  height: 48px !important;
+  background-color: rgba($bg-tertiary, 0.4) !important;
+  border: 1px solid $border-color !important;
+  border-radius: 12px !important;
+  color: $text-primary !important;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  backdrop-filter: blur(10px) !important;
+  font-family: inherit;
+  width: 100%;
+
+  &::placeholder {
+    color: $text-secondary;
   }
 
-  form button{
-    height: 40px;
-    font-size: 1.2rem;
+  &:focus {
+    outline: none;
+    background-color: rgba($bg-tertiary, 0.6) !important;
+    border-color: $accent-primary !important;
+    box-shadow: 0 0 30px rgba($accent-primary, 0.15) !important;
+
+    & ~ .inputIcon {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+  }
+
+  &:hover:not(:focus) {
+    border-color: rgba($accent-primary, 0.4) !important;
+    background-color: rgba($bg-tertiary, 0.5) !important;
   }
 }
 
-.text{
-  margin-top: 1rem;
-  color: var(--white);
+.submitButton {
+  height: 48px !important;
+  background: linear-gradient(135deg, $accent-primary, $accent-secondary) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  color: $text-primary !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  letter-spacing: 0.5px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  margin-top: 8px !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba($text-primary, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 20px 40px rgba($accent-primary, 0.3) !important;
+    filter: brightness(1.1) !important;
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0) !important;
+  }
+
+  &:disabled {
+    cursor: not-allowed !important;
+    opacity: 0.7 !important;
+
+    svg {
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, $border-color, transparent);
+  margin: 24px 0;
+  animation: slideInLeft 0.6s ease-out 0.3s backwards;
+}
+
+.signupPrompt {
+  text-align: center;
+  color: $text-secondary;
+  font-size: 0.95rem;
+  margin: 0;
+  animation: fadeInUp 0.8s ease-out 0.4s backwards;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.signupLink {
+  color: $accent-primary;
+  font-weight: 600;
+  transition: all 0.3s ease;
   cursor: pointer;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, $accent-primary, $accent-secondary);
+    transition: width 0.3s ease;
+  }
+
+  &:hover {
+    color: $accent-secondary;
+
+    &::after {
+      width: 100%;
+    }
+  }
 }
 
-.signupText{
-  color: var(--white);
-  margin-bottom: 1rem;
-} 
+.backgroundDecor {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, rgba($accent-primary, 0.1), rgba($accent-secondary, 0.1));
+  border-radius: 50%;
+  filter: blur(80px);
+  bottom: -150px;
+  right: -150px;
+  z-index: 0;
+  animation: float 8s ease-in-out infinite;
 
-
-@media (max-width: 620px) {
-  .login{
-    width: 90%;
+  @media (max-width: 768px) {
+    width: 200px;
+    height: 200px;
+    bottom: -100px;
+    right: -100px;
   }
 }
