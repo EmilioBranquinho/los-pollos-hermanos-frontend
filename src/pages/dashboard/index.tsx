@@ -11,6 +11,7 @@ import { api } from '@/services/apiClient'
 import { ModalOrder } from '../../components/ui/ModalOrder'
 import { toast } from 'react-toastify'
 import { AuthContext } from '@/contexts/AuthContext';
+import LoadingSpinner from '@/components/ui/Loading/loading';
 
 interface Order {
     id: string;
@@ -134,9 +135,7 @@ export default function Dashboard({ orders }: OrderProps){
                 <div className={styles.containerHeader}>
                     <h1>Últimos pedidos</h1>
                     <button onClick={handleRefreshOrders} disabled={isLoading} title="Atualizar pedidos">
-                        <FiRefreshCcw size={25} color="#00d9ff" style={{
-                            animation: isLoading ? 'spin 1s linear infinite' : 'none'
-                        }}/>
+                        <FiRefreshCcw size={25} color="#00d9ff" className={isLoading ? styles.spin : ''}/>
                     </button>
                 </div>
                 <article className={styles.listOrders}>
@@ -172,6 +171,8 @@ export default function Dashboard({ orders }: OrderProps){
                 handleFinishOrder={handleFinishOrder}
                 />
             )}
+
+            {loadingModal && <LoadingSpinner/>}
             
         </div>
         </>

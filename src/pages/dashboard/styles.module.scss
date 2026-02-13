@@ -104,15 +104,19 @@ $border-color: rgba(255, 255, 255, 0.08);
       animation: glow 2s ease-in-out;
       transform: translateY(-2px);
 
-      svg {
-        animation: spin 1s linear infinite;
-      }
+      // svg {
+      //   animation: spin 1s linear infinite;
+      // }
     }
 
     svg {
       display: block;
     }
   }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
@@ -123,6 +127,7 @@ $border-color: rgba(255, 255, 255, 0.08);
     transform: rotate(360deg);
   }
 }
+
 
 .listOrders {
   display: grid;
