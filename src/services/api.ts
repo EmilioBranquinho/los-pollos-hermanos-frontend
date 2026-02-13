@@ -9,7 +9,7 @@ export function setupAPIClient(ctx?: GetServerSidePropsContext){
     let cookies = parseCookies(ctx);
 
     const api = axios.create({
-    baseURL: "http://localhost:9000",
+    baseURL: process.env.NODE_ENV === "production" ? "https://api-los-pollos-hermanos.onrender.com" : "http://localhost:9000",
     headers: {
         Authorization: `Bearer ${cookies['@nextauth.token']}`
     }
