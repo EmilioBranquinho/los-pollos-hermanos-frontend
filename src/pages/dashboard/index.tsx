@@ -5,11 +5,12 @@ import styles from './styles.module.scss'
 import { Header } from '@/components/ui/Header'
 import { FiRefreshCcw } from 'react-icons/fi'
 import { setupAPIClient } from '@/services/api'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { api } from '@/services/apiClient'
 import { ModalOrder } from '../../components/ui/ModalOrder'
 import { toast } from 'react-toastify'
+import { AuthContext } from '@/contexts/AuthContext';
 
 interface Order {
     id: string;
@@ -57,12 +58,21 @@ export default function Dashboard({ orders }: OrderProps){
     const[modalItem, setModalItem] = useState<OrderItemProps[]>([]);
     const[modalVisible, setModalVisible] = useState(false);
     const[isLoading, setIsLoading] = useState(false);
+    const[loadingModal, setLoadingModal] = useState(false);
+    
+    const { user } = useContext(AuthContext)
 
     function handleCloseModal(){
         setModalVisible(false)
     }
+
+    useEffect(()=>{
+        toast.success(`Bem-vindo de volta, ${user?.name}`)
+    }, [])
     
     async function handleOpenModalView(id: string){
+        setLoadingModal(true)
+
         try {
             const response = await api.get("/order/detail", {
                 params: {
@@ -73,10 +83,12 @@ export default function Dashboard({ orders }: OrderProps){
             console.log(response.data)
 
             setModalItem(response.data)
+            setLoadingModal(false)
             setModalVisible(true)
         } catch (error) {
             toast.error("Erro ao carregar detalhes do pedido")
             console.log(error)
+            setLoadingModal(false)
         }
     }
 

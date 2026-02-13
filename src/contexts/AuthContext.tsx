@@ -89,12 +89,10 @@ export function AuthProvider({children}: AuthProviderProps){
             //passar o token para todas as proximas requisicoes
             api.defaults.headers['Authorization'] = `Bearer ${token}`
 
-            toast.success(`Bem-vindo de volta, ${name}`)
-
             Router.push('/dashboard')
-             
+            
         } catch (error) {
-            toast.error("Erro ao acessar, verifique as sus credenciais")
+            toast.error("Erro ao acessar, verifique as suas credenciais")
             console.log(error)
         }
 
@@ -118,7 +116,6 @@ export function AuthProvider({children}: AuthProviderProps){
         }
 
     }
-
     
 
     return(
