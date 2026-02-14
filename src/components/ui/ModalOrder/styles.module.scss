@@ -69,6 +69,7 @@ $border-color: rgba(255, 255, 255, 0.08);
 }
 
 .containerItem {
+  opacity: 0;
   background: linear-gradient(135deg, rgba($accent-primary, 0.05), rgba($accent-secondary, 0.05));
   border: 1px solid $border-color;
   border-radius: 12px;

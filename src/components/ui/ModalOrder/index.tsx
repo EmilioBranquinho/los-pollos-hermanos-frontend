@@ -46,7 +46,6 @@ export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder, lo
         onRequestClose={onRequestClose}
         className={styles.modal}
         style={customStyles}
-        closeTimeoutMS={200}
         >
             <button
             type='button'
@@ -79,8 +78,11 @@ export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder, lo
                 </span>
 
                 {order && order.length > 0 ? (
-                    order.map((item) =>(
-                        <section key={item.id} className={`${styles.containerItem} ${isOpen ? styles.animateItem : ''}`}>
+                    order.map((item, index) =>(
+                        <section key={item.id}
+                        className={`${styles.containerItem} ${isOpen ? styles.animateItem : ''}`}
+                        style={{ animationDelay: `${0.1 + index * 0.05}s` }}
+                        >
                             <span>
                                 <strong>{item.amount}x</strong> {item.product.name}
                             </span>
