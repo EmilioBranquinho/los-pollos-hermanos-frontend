@@ -1,0 +1,225 @@
+// Design System
+$bg-primary: #0f1219;
+$bg-secondary: #1a1f2e;
+$bg-tertiary: #252d3d;
+$accent-primary: #00d9ff;
+$accent-secondary: #7c3aed;
+$text-primary: #ffffff;
+$text-secondary: #a0aec0;
+$border-color: rgba(255, 255, 255, 0.08);
+$danger-color: #ef4444;
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+  margin-top: 100px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0;
+    letter-spacing: 0.3px;
+  }
+}
+
+.count {
+  background: linear-gradient(135deg, $accent-primary, $accent-secondary);
+  color: $text-primary;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.list {
+  display: flex;
+  gap: 16px;
+  max-height: 1500px;
+  overflow-y: auto;
+  padding-right: 8px;
+  margin-top: 25px;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba($bg-tertiary, 0.4);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($accent-primary, 0.4);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba($accent-primary, 0.6);
+    }
+  }
+}
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba($bg-tertiary, 0.6);
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  animation: fadeInUp 0.4s ease-out;
+  min-width: 253px;
+ 
+
+  &:hover {
+    border-color: rgba($accent-primary, 0.4);
+    background-color: rgba($bg-tertiary, 0.8);
+    box-shadow: 0 10px 30px rgba($accent-primary, 0.1);
+    transform: translateY(-4px);
+  }
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  background-color: rgba($bg-secondary, 0.5);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+
+  .productCard:hover & {
+    transform: scale(1.08);
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.productName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin: 0;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.productDescription {
+  font-size: 0.85rem;
+  color: $text-secondary;
+  margin: 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: $accent-primary;
+  font-weight: 700;
+  font-size: 1rem;
+  scroll-behavior: auto;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.deleteButton {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($danger-color, 0.1);
+  border: 1px solid rgba($danger-color, 0.3);
+  border-radius: 8px;
+  color: $danger-color;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  &:hover:not([disabled]) {
+    background-color: rgba($danger-color, 0.15);
+    border-color: $danger-color;
+    box-shadow: 0 0 20px rgba($danger-color, 0.2);
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px 20px;
+  border: 2px dashed $border-color;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba($accent-primary, 0.02), rgba($accent-secondary, 0.02));
+
+  p {
+    color: $text-primary;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+  }
+
+  span {
+    color: $text-secondary;
+    font-size: 0.95rem;
+    display: block;
+  }
+}

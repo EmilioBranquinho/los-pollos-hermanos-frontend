@@ -19,13 +19,13 @@ export function Header(){
 
                 <nav className={styles.menuNav}>
 
-                    <Link href='/category'>
+                    <a href='/category'>
                     <span>Categorias</span>                    
-                    </Link>
+                    </a>
                     
-                    <Link href='/cardapio'>
+                    <a href='/product'>
                     <span>Cardápio</span>
-                    </Link>
+                    </a>
                     
                     <button
                     onClick={signOut}

@@ -1,22 +1,35 @@
 import { Header } from "@/components/ui/Header";
 import styles from "./styles.module.scss"
 import { FiUpload } from "react-icons/fi";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { canSSRAuth } from "@/utils/canSSRAuth";
 import { api } from "@/services/apiClient";
 import { setupAPIClient } from "@/services/api";
 import { toast } from "react-toastify";
+import { ProductList } from "@/components/ProductList";
 
 interface Category {
     id: string;
     name: string;
 }
 
-interface CategoryProps {
-    categories: Category[];
+
+interface ProductProps {
+    id: string,
+    name:string,
+    description: string,
+    price: number,
+    banner: string
 }
 
-export default function Product({ categories }: CategoryProps){
+
+interface ServerSideData {
+    categories: Category[],
+    products: ProductProps[]
+}
+
+
+export default function Product({ categories, products }: ServerSideData){
 
     const[avatarUrl, setAvatarUrl] = useState("");
     const[imageAvatar, setImageAvatar] = useState<File | null>(null);
@@ -25,6 +38,7 @@ export default function Product({ categories }: CategoryProps){
     const[name, setName] = useState("");
     const[price, setPrice] = useState("");
     const[description, setDescription] = useState("");
+    const[productsList, setProductsList] = useState<ProductProps[]>(products || []);
 
     async function handleFile(e: ChangeEvent<HTMLInputElement> ){
 
@@ -67,9 +81,10 @@ export default function Product({ categories }: CategoryProps){
             formData.append("file", imageAvatar);
         }
         
-
         try{
             const response = await api.post("/product", formData);
+
+            setProductsList([...productsList, response.data])
 
             setName("");
             setPrice("");
@@ -84,9 +99,38 @@ export default function Product({ categories }: CategoryProps){
             toast.error("Erro ao cadastrar o produto")         
         }
 
-
     }
+    
+    // async function loadProducts(){
+        
+    //     try{
+    //         const response = await api.get("/products")
 
+    //         console.log(response.data)
+
+    //         setProductsList(response.data)
+    //     } catch (error) {
+    //         console.log(error)
+    //         return;
+    //     }
+    // }
+
+     useEffect(()=>{
+       console.log(productsList)
+     }, [])
+
+     async function handleDeleteProduct(product_id: string){
+
+        try {
+            const response = await api.delete(`/product/remove?product_id=${product_id}`)
+
+            toast.success("Produto deletado com sucesso!")
+            setProductsList(prev => prev.filter((product) => product.id !== product_id)
+            )
+        } catch (error) {
+            console.log(error)
+        }
+     }
 
     return(
         <>
@@ -164,6 +208,11 @@ export default function Product({ categories }: CategoryProps){
                  </button>
             </form>
 
+                <ProductList 
+                    products={productsList}
+                    onProductDeleted={(productId) => {handleDeleteProduct(productId)}}
+                />
+
         </main>
 
         </>
@@ -174,12 +223,16 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
         const api = setupAPIClient(ctx);
     
         const response = await api.get("/category")
+
+        const productsData = await api.get("/products")
     
         const categories = response.data;
+        const products = productsData.data; 
  
         return {
             props:{
-                categories: categories
+                categories: categories,
+                products: products
             }
         }
 })
