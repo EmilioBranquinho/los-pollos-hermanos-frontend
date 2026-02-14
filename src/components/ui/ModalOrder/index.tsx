@@ -46,6 +46,7 @@ export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder, lo
         onRequestClose={onRequestClose}
         className={styles.modal}
         style={customStyles}
+        closeTimeoutMS={200}
         >
             <button
             type='button'
