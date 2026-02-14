@@ -122,7 +122,7 @@ export default function Product({ categories, products }: ServerSideData){
 
     return(
         <>
-        <Header/>
+        <Header name="product"/>
             <div className={styles.containerHeader}>
                 <div>
                     <h1>Novo Produto</h1>

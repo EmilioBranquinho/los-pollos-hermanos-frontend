@@ -132,7 +132,7 @@ export default function Dashboard({ orders }: OrderProps){
     return(
         <>
         <div>
-            <Header/>
+            <Header name="dashboard"/>
             <main className={styles.container}>
                 <div className={styles.containerHeader}>
                     <h1>Últimos pedidos</h1>

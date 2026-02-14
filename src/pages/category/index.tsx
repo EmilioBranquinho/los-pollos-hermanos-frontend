@@ -81,7 +81,7 @@ export default function Category({ categories }: CategoryProps){
             <title>Categorias - Los Pollos Hermanos</title>
         </Head>
         <div>
-            <Header/>
+            <Header name="category"/>
             <main className={styles.container}>
                 <div className={styles.containerHeader}>
                     <div>

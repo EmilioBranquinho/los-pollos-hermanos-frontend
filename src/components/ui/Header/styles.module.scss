@@ -42,7 +42,9 @@ $bg-secondary: #1a1f2e;
         }
     }
 
-    button{
+}
+
+    .buttonSignOut{
         margin-left: 2rem;
         background: transparent;
         border: 0;
@@ -52,4 +54,3 @@ $bg-secondary: #1a1f2e;
             transform: scale(1.2);
         }
     }
-}
