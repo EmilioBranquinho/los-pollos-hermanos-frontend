@@ -7,6 +7,7 @@ import { api } from "@/services/apiClient";
 import { setupAPIClient } from "@/services/api";
 import { toast } from "react-toastify";
 import { ProductList } from "@/components/ProductList";
+import { Button } from "@/components/ui/Button";
 
 interface Category {
     id: string;
@@ -39,6 +40,7 @@ export default function Product({ categories, products }: ServerSideData){
     const[price, setPrice] = useState("");
     const[description, setDescription] = useState("");
     const[productsList, setProductsList] = useState<ProductProps[]>(products || []);
+    const[loading, setLoading]= useState(false);
 
     async function handleFile(e: ChangeEvent<HTMLInputElement> ){
 
@@ -59,8 +61,7 @@ export default function Product({ categories, products }: ServerSideData){
         }
     }
 
-    function handleChangeCategory(e: ChangeEvent<HTMLSelectElement>){
-        
+    function handleChangeCategory(e: ChangeEvent<HTMLSelectElement>){      
         setSelectedCategory(e.target.value)
     }
 
@@ -71,6 +72,8 @@ export default function Product({ categories, products }: ServerSideData){
             toast.error("Preencha todos os campos");
             return;
         }
+
+        setLoading(true)
 
         const formData = new FormData();
         formData.append("name", name);
@@ -91,12 +94,14 @@ export default function Product({ categories, products }: ServerSideData){
             setDescription("");
             setImageAvatar(null);
             setAvatarUrl("");
-
+            setLoading(false)
             toast.success("Produto cadastrado com sucesso")
 
         } catch (error) {
             console.log(error)
             toast.error("Erro ao cadastrar o produto")         
+        } finally {
+            setLoading(false)
         }
 
     }
@@ -183,11 +188,12 @@ export default function Product({ categories, products }: ServerSideData){
                  onChange={(e)=>{setDescription(e.target.value)}}
                  />
 
-                 <button
+                 <Button
+                  loading={loading}
                   type="submit"
                   className={styles.buttonAdd}>
                     Cadastrar Produto
-                 </button>
+                 </Button>
             </form>
 
                 <ProductList 

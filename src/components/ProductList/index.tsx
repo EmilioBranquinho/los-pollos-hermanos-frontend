@@ -26,8 +26,6 @@ export function ProductList({ products, onProductDeleted }: ProductListProps) {
 
   const APIurl = process.env.NEXT_PUBLIC_API_URL as string;
 
-  console.log(APIurl)
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
