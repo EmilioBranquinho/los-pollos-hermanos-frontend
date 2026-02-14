@@ -8,6 +8,7 @@ import { setupAPIClient } from "@/services/api";
 import { toast } from "react-toastify";
 import { ProductList } from "@/components/ProductList";
 import { Button } from "@/components/ui/Button";
+import { ClipLoader } from "react-spinners";
 
 interface Category {
     id: string;
@@ -189,10 +190,10 @@ export default function Product({ categories, products }: ServerSideData){
                  />
 
                  <Button
-                  loading={loading}
+                  disabled={loading}
                   type="submit"
                   className={styles.buttonAdd}>
-                    Cadastrar Produto
+                    {loading ? <ClipLoader/> : "Cadastrar Produto"}
                  </Button>
             </form>
 
