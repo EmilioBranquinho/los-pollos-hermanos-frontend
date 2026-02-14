@@ -42,7 +42,7 @@ export function ProductList({ products, onProductDeleted }: ProductListProps) {
               {product.banner && (
                 <div className={styles.imageWrapper}>
                   <img
-                    src={`${process.env.NEXT_PUBLIC_API_URL as string}/img/${product.banner}`}
+                    src={`${APIurl}/img/${product.banner}`}
                     alt={product?.name}
                     className={styles.image}
                   />
