@@ -193,7 +193,7 @@ export default function Product({ categories, products }: ServerSideData){
                   disabled={loading}
                   type="submit"
                   className={styles.buttonAdd}>
-                    {loading ? <ClipLoader/> : "Cadastrar Produto"}
+                    {loading ? <ClipLoader color="#FFF"/> : "Cadastrar Produto"}
                  </Button>
             </form>
 
