@@ -80,7 +80,7 @@ export function ModalOrder({isOpen, onRequestClose, order, handleFinishOrder, lo
 
                 {order && order.length > 0 ? (
                     order.map((item) =>(
-                        <section key={item.id} className={styles.containerItem}>
+                        <section key={item.id} className={`${styles.containerItem} ${isOpen ? styles.animateItem : ''}`}>
                             <span>
                                 <strong>{item.amount}x</strong> {item.product.name}
                             </span>
