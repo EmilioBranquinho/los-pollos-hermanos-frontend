@@ -100,24 +100,6 @@ export default function Product({ categories, products }: ServerSideData){
         }
 
     }
-    
-    // async function loadProducts(){
-        
-    //     try{
-    //         const response = await api.get("/products")
-
-    //         console.log(response.data)
-
-    //         setProductsList(response.data)
-    //     } catch (error) {
-    //         console.log(error)
-    //         return;
-    //     }
-    // }
-
-     useEffect(()=>{
-       console.log(productsList)
-     }, [])
 
      async function handleDeleteProduct(product_id: string){
 
