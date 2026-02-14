@@ -68,10 +68,6 @@ export default function Dashboard({ orders }: OrderProps){
         setModalVisible(false)
     }
 
-    useEffect(()=>{
-        toast.success(`Bem-vindo de volta, ${user?.name}`)
-    }, [])
-    
     async function handleOpenModalView(id: string){
         setLoadingModal(true)
 
