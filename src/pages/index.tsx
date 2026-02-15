@@ -6,6 +6,9 @@ import { FormEvent, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '@/contexts/AuthContext';
 import { toast } from 'react-toastify';
 import { FiArrowRight, FiLock, FiMail } from 'react-icons/fi';
+import Image from 'next/image';
+import Logo from '../../public/logo.png'
+import Logo2 from '../../public/horizontal-logo.png'
 
 
 export default function Home() {
@@ -45,8 +48,15 @@ export default function Home() {
        <div className={styles.containerCenter}>
       <div className={styles.loginCard}>
         <div className={styles.loginHeader}>
-          <h1>Bem-vindo</h1>
-          <p>Acesse sua conta para continuar</p>
+          <Image
+          src={Logo}
+          quality={100}
+          priority={true}
+          width={250}
+          height={200}
+          alt='logo'
+          unoptimized
+          />
         </div>
 
         <form onSubmit={(e)=>{onSubmit(e)}} className={styles.form}>
