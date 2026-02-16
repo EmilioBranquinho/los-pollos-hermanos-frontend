@@ -29,6 +29,7 @@ export function Header({ name }: NameProps){
                  height={150} 
                  quality={100}
                  unoptimized
+                 priority
                 />
                 </a>
 

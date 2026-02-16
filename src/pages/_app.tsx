@@ -1,9 +1,8 @@
 import { AuthProvider } from "@/contexts/AuthContext";
 import "../styles/globals.scss";
 import type { AppProps } from "next/app";
-
-
-import dynamic from "next/dist/shared/lib/dynamic";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 const ToastContainer = dynamic(
   () => import("react-toastify").then(m => m.ToastContainer),
@@ -11,8 +10,18 @@ const ToastContainer = dynamic(
 );
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <AuthProvider>
-    <Component {...pageProps} />;
-    <ToastContainer autoClose={3000} aria-label={undefined} />
-  </AuthProvider> 
+  const router = useRouter();
+
+  const noBgRoutes: Array<string> = ["/", "/signup"];
+  const removeBg: boolean = noBgRoutes.includes(router.pathname);
+
+  return (
+    <AuthProvider>
+      <div className={removeBg ? "" : "default-background"}>
+        <Component {...pageProps} />
+      </div>
+
+      <ToastContainer autoClose={3000} />
+    </AuthProvider>
+  );
 }

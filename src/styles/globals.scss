@@ -31,12 +31,13 @@ a{
   text-decoration: none;
 }
 
-body{
-   background: linear-gradient(
+.default-background {
+  background: linear-gradient(
     135deg,
     $bg-primary 0%,
     $bg-secondary 100%
   );
+  min-height: 100vh;
 }
 
 body, input, button, textarea, select{
