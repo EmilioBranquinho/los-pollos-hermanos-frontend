@@ -1,12 +1,49 @@
-$bg-primary: #0f1219;
-$bg-secondary: #1a1f2e;
+// =============================
+// VARIABLES
+// =============================
 
-.headerContainer{
+$bg-primary: #1c0f0a;
+$bg-secondary: #2a1510;
+$bg-glass: rgba(42, 21, 16, 0.75);
+
+$accent-primary: #f56427;
+$accent-secondary: #7a0c0c;
+
+$text-primary: #ffffff;
+$text-secondary: #d1b5a8;
+
+$border-color: rgba(255, 255, 255, 0.08);
+
+
+// =============================
+// HEADER CONTAINER
+// =============================
+
+.headerContainer {
     height: 5rem;
-    background-color: linear-gradient(135deg, $bg-primary 0%, $bg-secondary 100%);
+
+    /* Gradiente correto */
+    background: linear-gradient(
+        135deg,
+        $bg-primary 0%,
+        $bg-secondary 100%
+    );
+
+    backdrop-filter: blur(8px);
+
+    border-bottom: 1px solid $border-color;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.headerContent{
+
+// =============================
+// HEADER CONTENT
+// =============================
+
+.headerContent {
     max-width: 1120px;
     height: 5rem;
     margin: 0 auto;
@@ -16,41 +53,87 @@ $bg-secondary: #1a1f2e;
     justify-content: space-between;
     align-items: center;
 
-    img{
-        cursor: pointer; 
-        margin-top: 100px;     
+    img {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        margin-top: 40px;
+
+        &:hover {
+            transform: scale(1.05);
+        }
     }
 }
 
-.menuNav{
+
+// =============================
+// MENU NAVIGATION
+// =============================
+
+.menuNav {
     display: flex;
     align-items: center;
 
-    a{
-        color: var(--white);
+    a {
+        color: $text-secondary;
         padding: 0 0.5rem;
         display: inline-block;
         position: relative;
-        transition: color 0.7s;
+        transition: all 0.3s ease;
 
         & + a {
             margin-left: 2rem;
         }
 
-        &:hover{
-            color: var(--red-900);
+        /* Underline animado */
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(
+                90deg,
+                $accent-primary,
+                $accent-secondary
+            );
+            transition: width 0.3s ease;
+        }
+
+        &:hover {
+            color: $accent-primary;
+
+            &::after {
+                width: 100%;
+            }
         }
     }
-
 }
 
-    .buttonSignOut{
-        margin-left: 2rem;
-        background: transparent;
-        border: 0;
-        transition: transform 0.8s;
 
-        &:hover{
-            transform: scale(1.2);
+// =============================
+// SIGN OUT BUTTON
+// =============================
+
+.buttonSignOut {
+    margin-left: 2rem;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    transition: transform 0.3s ease;
+
+    svg {
+        color: $text-secondary;
+        transition: color 0.3s ease;
+    }
+
+    &:hover {
+        transform: scale(1.15);
+
+        svg {
+            color: $accent-primary;
         }
     }
+}
+

@@ -15,7 +15,7 @@ export function ButtonFinishOrder({loading, children, ...rest}: ButtonProps) {
     {...rest}
     >
         {loading ? (
-        <ClipLoader size={20} color="#3498db"  />    
+        <ClipLoader size={25} color="#FFF"  />    
         ): (
             <span>{children}</span>
         )}

@@ -107,7 +107,7 @@ export default function Category({ categories }: CategoryProps){
                                 disabled={loading}
                                 className={styles.buttonAdd}
                             >
-                                {loading ? <ClipLoader/> : "Adicionar"}
+                                {loading ? <ClipLoader color="#FFF"/> : "Adicionar"}
                             </Button>
                         </div>
                     </div>

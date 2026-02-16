@@ -61,6 +61,10 @@ export default function Dashboard({ orders }: OrderProps){
     const[isLoading, setIsLoading] = useState(false);
     const[loadingModal, setLoadingModal] = useState(false);
     const[loadingFinish, setLoadingFinish] = useState(false);
+
+    useEffect(()=>{
+        console.log(ordersList)
+    }, [])
     
     const { user } = useContext(AuthContext)
 
@@ -137,7 +141,7 @@ export default function Dashboard({ orders }: OrderProps){
                 <div className={styles.containerHeader}>
                     <h1>Últimos pedidos</h1>
                     <button onClick={handleRefreshOrders} disabled={isLoading} title="Atualizar pedidos">
-                        <FiRefreshCcw size={25} color="#00d9ff" className={isLoading ? styles.spin : ''}/>
+                        <FiRefreshCcw size={25} color="#f56427" className={isLoading ? styles.spin : ''}/>
                     </button>
                 </div>
                 <article className={styles.listOrders}>

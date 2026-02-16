@@ -123,21 +123,20 @@ export default function Product({ categories, products }: ServerSideData){
     return(
         <>
         <Header name="product"/>
+
+        <main className={styles.container}>
             <div className={styles.containerHeader}>
                 <div>
                     <h1>Novo Produto</h1>
                     <p className={styles.subtitle}>Adicione um novo produto ao cardápio</p>
                 </div>
             </div>
-        <main className={styles.container}>
-            
             <form onSubmit={(e)=>{handleRegisterProduct(e)}} className={styles.form}>
 
                 <label className={styles.labelAvatar} htmlFor="avatar">
                     <span>
                         <FiUpload size={30} color="#FFF"/>
                     </span>
-
                     <input 
                     type="file" 
                     accept="image/png, image/jpeg" 

@@ -1,13 +1,25 @@
-// Design System
-$bg-primary: #0f1219;
-$bg-secondary: #1a1f2e;
-$bg-tertiary: #252d3d;
-$accent-primary: #00d9ff;
-$accent-secondary: #7c3aed;
+// =============================
+// LOS POLLOS PRODUCT DESIGN SYSTEM
+// =============================
+
+$bg-primary: #1c0f0a;
+$bg-secondary: #2a1510;
+$bg-tertiary: #3a1f18;
+
+$accent-primary: #f56427;
+$accent-secondary: #7a0c0c;
+
 $text-primary: #ffffff;
-$text-secondary: #a0aec0;
+$text-secondary: #d1b5a8;
+
 $border-color: rgba(255, 255, 255, 0.08);
+$border-hover: rgba(245, 100, 39, 0.3);
 $danger-color: #ef4444;
+
+
+// =============================
+// ANIMATION
+// =============================
 
 @keyframes fadeInUp {
   from {
@@ -20,55 +32,69 @@ $danger-color: #ef4444;
   }
 }
 
+
+// =============================
+// CONTAINER
+// =============================
+
 .container {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+  gap: 12px;
   margin-top: 100px;
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
+
+
+// =============================
+// HEADER
+// =============================
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
 
   h2 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    color: $text-primary;
     margin: 0;
-    letter-spacing: 0.3px;
+
+    background: linear-gradient(
+      135deg,
+      $accent-primary,
+      $accent-secondary
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
 .count {
-  background: linear-gradient(135deg, $accent-primary, $accent-secondary);
-  color: $text-primary;
-  padding: 6px 14px;
-  border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 600;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: $text-secondary;
 }
+
+
+// =============================
+// LIST
+// =============================
 
 .list {
   display: flex;
-  gap: 16px;
+  gap: 20px;
+  margin-top: 20px;
   max-height: 1500px;
   overflow-y: auto;
   padding-right: 8px;
-  margin-top: 25px;
 
   &::-webkit-scrollbar {
     width: 6px;
   }
 
   &::-webkit-scrollbar-track {
-    background: rgba($bg-tertiary, 0.4);
+    background: rgba($bg-tertiary, 0.5);
     border-radius: 3px;
   }
 
@@ -77,37 +103,51 @@ $danger-color: #ef4444;
     border-radius: 3px;
 
     &:hover {
-      background: rgba($accent-primary, 0.6);
+      background: rgba($accent-primary, 0.7);
     }
   }
 }
 
+
+// =============================
+// PRODUCT CARD
+// =============================
+
 .productCard {
   display: flex;
   flex-direction: column;
-  background-color: rgba($bg-tertiary, 0.6);
+  min-width: 260px;
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    rgba($bg-tertiary, 0.95),
+    rgba($bg-secondary, 0.98)
+  );
+
   border: 1px solid $border-color;
-  border-radius: 12px;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(10px);
+
+  transition: all 0.3s ease;
   animation: fadeInUp 0.4s ease-out;
-  min-width: 253px;
- 
 
   &:hover {
-    border-color: rgba($accent-primary, 0.4);
-    background-color: rgba($bg-tertiary, 0.8);
-    box-shadow: 0 10px 30px rgba($accent-primary, 0.1);
-    transform: translateY(-4px);
+    border-color: $border-hover;
+    box-shadow: 0 15px 40px rgba($accent-primary, 0.15);
+    transform: translateY(-6px);
   }
 }
 
+
+// =============================
+// IMAGE
+// =============================
+
 .imageWrapper {
   width: 100%;
-  height: 160px;
+  height: 170px;
   overflow: hidden;
-  background-color: rgba($bg-secondary, 0.5);
+  background: $bg-secondary;
 }
 
 .image {
@@ -117,15 +157,20 @@ $danger-color: #ef4444;
   transition: transform 0.4s ease;
 
   .productCard:hover & {
-    transform: scale(1.08);
+    transform: scale(1.06);
   }
 }
+
+
+// =============================
+// CONTENT
+// =============================
 
 .content {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 16px;
+  gap: 14px;
+  padding: 18px;
 }
 
 .productName {
@@ -133,68 +178,60 @@ $danger-color: #ef4444;
   font-weight: 700;
   color: $text-primary;
   margin: 0;
-  letter-spacing: 0.2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .productDescription {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: $text-secondary;
   margin: 0;
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-
+  line-height: 1.5;
 }
+
+
+// =============================
+// FOOTER
+// =============================
 
 .footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 8px;
 }
 
 .price {
-  display: flex;
-  align-items: center;
-  gap: 6px;
   color: $accent-primary;
   font-weight: 700;
   font-size: 1rem;
-  scroll-behavior: auto;
-
-  svg {
-    width: 18px;
-    height: 18px;
-  }
 }
+
+
+// =============================
+// DELETE BUTTON
+// =============================
 
 .deleteButton {
   width: 36px;
   height: 36px;
+  border-radius: 10px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba($danger-color, 0.1);
+
+  background: rgba($danger-color, 0.08);
   border: 1px solid rgba($danger-color, 0.3);
-  border-radius: 8px;
   color: $danger-color;
+
   cursor: pointer;
   transition: all 0.3s ease;
-  flex-shrink: 0;
-
-  svg {
-    width: 18px;
-    height: 18px;
-  }
 
   &:hover:not([disabled]) {
-    background-color: rgba($danger-color, 0.15);
+    background: rgba($danger-color, 0.2);
     border-color: $danger-color;
-    box-shadow: 0 0 20px rgba($danger-color, 0.2);
+    box-shadow: 0 0 20px rgba($danger-color, 0.3);
   }
 
   &[disabled] {
@@ -203,23 +240,33 @@ $danger-color: #ef4444;
   }
 }
 
+
+// =============================
+// EMPTY STATE
+// =============================
+
 .emptyState {
   text-align: center;
   padding: 40px 20px;
-  border: 2px dashed $border-color;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba($accent-primary, 0.02), rgba($accent-secondary, 0.02));
+  border-radius: 16px;
+
+  border: 1px dashed $border-color;
+
+  background: linear-gradient(
+    135deg,
+    rgba($accent-primary, 0.05),
+    rgba($accent-secondary, 0.05)
+  );
 
   p {
     color: $text-primary;
     font-size: 1.1rem;
     font-weight: 600;
-    margin: 0 0 8px 0;
+    margin-bottom: 6px;
   }
 
   span {
     color: $text-secondary;
     font-size: 0.95rem;
-    display: block;
   }
 }
