@@ -6,6 +6,7 @@ import { FormEvent, useContext, useState } from 'react';
 import { AuthContext } from '@/contexts/AuthContext';
 import { toast } from 'react-toastify';
 import { FiArrowRight, FiLock, FiMail, FiUser } from 'react-icons/fi';
+import Head from 'next/head';
 
 
 export default function SignUp() {
@@ -41,6 +42,9 @@ export default function SignUp() {
 
   return (
     <>
+    <Head>
+      <title>Cadastro | Los Pollos Hermanos</title>
+    </Head>
      <div className={styles.containerCenter}>
       <div className={styles.loginCard}>
         <div className={styles.loginHeader}>

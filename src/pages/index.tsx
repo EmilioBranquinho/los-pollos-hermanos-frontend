@@ -9,6 +9,7 @@ import { FiArrowRight, FiLock, FiMail } from 'react-icons/fi';
 import Image from 'next/image';
 import Logo from '../../public/logo.png'
 import Logo2 from '../../public/horizontal-logo.png'
+import Head from 'next/head';
 
 
 export default function Home() {
@@ -45,6 +46,10 @@ export default function Home() {
 
   return (
     <>
+    <Head>
+      <title>Login | Los Pollos Hermanos</title>
+    </Head>
+    
        <div className={styles.containerCenter}>
       <div className={styles.loginCard}>
         <div className={styles.loginHeader}>

@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { ProductList } from "@/components/ProductList";
 import { Button } from "@/components/ui/Button";
 import { ClipLoader } from "react-spinners";
+import Head from "next/head";
 
 interface Category {
     id: string;
@@ -122,6 +123,10 @@ export default function Product({ categories, products }: ServerSideData){
 
     return(
         <>
+        <Head>
+            <title>Cardápio | Los Pollos Hermanos</title>
+        </Head>
+        
         <Header name="product"/>
 
         <main className={styles.container}>

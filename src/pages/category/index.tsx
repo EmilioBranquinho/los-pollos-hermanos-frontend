@@ -78,7 +78,7 @@ export default function Category({ categories }: CategoryProps){
     return(
         <>
         <Head>
-            <title>Categorias - Los Pollos Hermanos</title>
+            <title>Categorias | Los Pollos Hermanos</title>
         </Head>
         <div>
             <Header name="category"/>

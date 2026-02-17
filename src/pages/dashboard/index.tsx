@@ -12,6 +12,7 @@ import { ModalOrder } from '../../components/ui/ModalOrder'
 import { toast } from 'react-toastify'
 import { AuthContext } from '@/contexts/AuthContext';
 import LoadingSpinner from '@/components/ui/Loading/loading';
+import Head from 'next/head';
 
 interface Order {
     id: string;
@@ -135,6 +136,10 @@ export default function Dashboard({ orders }: OrderProps){
 
     return(
         <>
+    <Head>
+      <title>Dashboard | Los Pollos Hermanos</title>
+    </Head>
+
         <div>
             <Header name="dashboard"/>
             <main className={styles.container}>
