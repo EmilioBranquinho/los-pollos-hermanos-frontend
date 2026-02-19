@@ -53,8 +53,8 @@ export function ProductList({ products, onProductDeleted }: ProductListProps) {
 
                 <div className={styles.footer}>
                   <div className={styles.price}>
-                    <FiDollarSign size={18} />
-                    <span>Preço : {product?.price}</span>
+                    {/* <FiDollarSign size={18} /> */}
+                    <span>Preço : {product?.price} Mzn</span>
                   </div>
 
                   <button
