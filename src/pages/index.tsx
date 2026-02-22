@@ -104,6 +104,13 @@ export default function Home() {
             Cadastre-se aqui
           </a>
         </p>
+
+                <p className={styles.signupPrompt}>
+          Baixe o aplicativo para android
+          <a href='/mobileapp/download' className={styles.signupLink}>
+            aqui
+          </a>
+        </p>
       </div>
 
       <div className={styles.backgroundDecor}></div>

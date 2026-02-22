@@ -1,0 +1,342 @@
+// Cores da pizzaria
+$bg-primary: #1c0f0a;
+$bg-secondary: #2a1510;
+$bg-tertiary: #3a1f18;
+$accent-primary: #f56427;
+$accent-secondary: #7a0c0c;
+$accent-highlight: #ffb703;
+$text-light: #ffffff;
+$text-muted: #b0a29f;
+
+// Espaçamento
+$spacing-xs: 8px;
+$spacing-sm: 12px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 28px;
+
+// Border radius
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+
+// Transitions
+$transition: all 0.3s ease;
+
+.container {
+  background-color: $bg-primary;
+  color: $text-light;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-md;
+}
+
+.containerHeader {
+  position: relative;
+  padding: $spacing-xl $spacing-md;
+  margin-bottom: $spacing-2xl;
+
+  @media (min-width: 768px) {
+    padding: $spacing-2xl;
+  }
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  color: $accent-primary;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition: $transition;
+  padding: $spacing-sm;
+  margin-bottom: $spacing-lg;
+
+  &:hover {
+    color: $accent-highlight;
+    transform: translateX(-4px);
+  }
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 700;
+  margin: 0 0 $spacing-sm 0;
+  background: linear-gradient(135deg, $accent-primary, $accent-highlight);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  @media (max-width: 480px) {
+    font-size: 32px;
+  }
+}
+
+.subtitle {
+  font-size: 18px;
+  color: $text-muted;
+  margin: 0;
+  line-height: 1.6;
+
+  @media (max-width: 480px) {
+    font-size: 16px;
+  }
+}
+
+.platforms {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: $spacing-xl;
+  margin-bottom: $spacing-2xl;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  align-items: start;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+  }
+}
+
+.downloadWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-lg;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.platformCard {
+  background-color: $bg-secondary;
+  border: 2px solid $bg-tertiary;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  text-align: center;
+  transition: $transition;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+   @media (max-width: 480px) {
+    font-size: 55px;
+  }
+
+  &:hover {
+    border-color: $accent-primary;
+    transform: translateY(-8px);
+    background-color: $bg-tertiary;
+  }
+}
+
+.platformIcon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($accent-primary, 0.15);
+  border-radius: $radius-md;
+  margin-bottom: $spacing-lg;
+  color: $accent-primary;
+}
+
+.platformTitle {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 $spacing-sm 0;
+  color: $text-light;
+}
+
+.platformDescription {
+  font-size: 14px;
+  color: $text-muted;
+  margin: 0 0 $spacing-lg 0;
+  line-height: 1.5;
+}
+
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  background-color: $accent-primary;
+  color: $bg-primary;
+  border: none;
+  padding: $spacing-md $spacing-xl;
+  border-radius: $radius-md;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition;
+  min-width: 200px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  &:hover {
+    background-color: $accent-highlight;
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba($accent-primary, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.benefits {
+  margin-top: $spacing-2xl;
+  padding: $spacing-xl;
+  background-color: $bg-secondary;
+  border-radius: $radius-lg;
+  border: 2px solid $bg-tertiary;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.benefitsTitle {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 $spacing-xl 0;
+  text-align: center;
+  color: $text-light;
+
+  @media (max-width: 480px) {
+    font-size: 24px;
+  }
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-lg;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.benefitCard {
+  background-color: $bg-primary;
+  padding: $spacing-lg;
+  border-radius: $radius-md;
+  border: 1px solid $bg-tertiary;
+  text-align: center;
+  transition: $transition;
+
+  &:hover {
+    border-color: $accent-primary;
+    background-color: $bg-tertiary;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 $spacing-sm 0;
+    color: $accent-primary;
+  }
+
+  p {
+    font-size: 14px;
+    color: $text-muted;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+.benefitIcon {
+  font-size: 48px;
+  margin-bottom: $spacing-md;
+  display: block;
+}
+
+.infoCard {
+  background: linear-gradient(135deg, $bg-secondary 0%, $bg-tertiary 100%);
+  border: 2px solid $accent-primary;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  height: fit-content;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, $accent-primary, $accent-highlight);
+  }
+}
+
+.infoHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-lg;
+}
+
+.infoBadge {
+  display: inline-block;
+  background-color: rgba($accent-primary, 0.2);
+  border: 1px solid $accent-primary;
+  color: $accent-primary;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-md;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.infoTitle {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 $spacing-lg 0;
+  color: $accent-highlight;
+}
+
+.infoList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 $spacing-lg 0;
+
+  li {
+    font-size: 14px;
+    color: $text-light;
+    margin-bottom: $spacing-md;
+    padding-left: $spacing-lg;
+    position: relative;
+    line-height: 1.6;
+
+    &::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: $accent-primary;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
+}
+
+.infoFooter {
+  font-size: 13px;
+  color: $text-muted;
+  margin: 0;
+  line-height: 1.6;
+  padding-top: $spacing-md;
+  border-top: 1px solid $bg-tertiary;
+}
