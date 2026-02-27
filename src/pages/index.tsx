@@ -101,12 +101,12 @@ export default function Home() {
         <p className={styles.signupPrompt}>
           Não tem conta?{' '}
           <a href='/signup' className={styles.signupLink}>
-            Cadastre-se aqui
+          Cadastre-se aqui
           </a>
         </p>
 
-                <p className={styles.signupPrompt}>
-          Baixe o aplicativo para android
+          <p className={styles.signupPrompt}>
+          Baixe o aplicativo para android{' '}
           <a href='/mobileapp/download' className={styles.signupLink}>
             aqui
           </a>

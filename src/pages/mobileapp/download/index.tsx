@@ -38,6 +38,7 @@ export default function DownloadPage() {
               Disponível no Google Play Store
             </p>
             <button 
+              disabled={true}
               className={styles.downloadButton}
               onClick={handleAndroidDownload}
             >
